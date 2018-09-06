@@ -1134,12 +1134,18 @@ class Node {
     if (startKey !== endKey) {
       while (startKey !== endKey && endOffset === 0) {
         const endText = this.getPreviousText(endKey)
+        if (!endText) {
+          break
+        }
         endKey = endText.key
         endOffset = endText.text.length
       }
 
       while (startKey !== endKey && startOffset === startText.text.length) {
         startText = this.getNextText(startKey)
+        if (!startText) {
+          break
+        }
         startKey = startText.key
         startOffset = 0
       }
